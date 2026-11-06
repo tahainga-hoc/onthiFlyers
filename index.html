@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambridge A2 Flyers - Reading and Writing Practice</title>
+    <style>
+        :root {
+            --primary-color: #1d4ed8;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        h1 { color: var(--primary-color); text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #64748b; margin-bottom: 30px; }
+        h2 { background: #e0f2fe; color: #0369a1; padding: 12px 15px; border-radius: 6px; margin-top: 35px; font-size: 17px; }
+        .question-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+        }
+        .question-box p { margin: 0 0 8px; font-weight: 600; }
+        input[type="text"], select, textarea {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            width: 100%;
+            max-width: 400px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        textarea { max-width: 100%; height: 100px; resize: vertical; }
+        .word-bank {
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #92400e;
+        }
+        .suggestion-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #166534;
+        }
+        .img-container {
+            text-align: center;
+            margin: 15px 0;
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px dashed #cbd5e1;
+        }
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+        .img-placeholder {
+            color: #64748b;
+            font-size: 14px;
+            font-style: italic;
+        }
+        .btn-submit {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover { background-color: #059669; }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+        .correct { color: #065f46; background: #d1fae5; }
+        .incorrect { color: #991b1b; background: #fee2e2; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>A2 Flyers - Reading and Writing</h1>
+    <p class="subtitle">Official Cambridge Practice Materials</p>
+
+    <form id="rwFullForm" onsubmit="checkAllRW(event)">
+        
+        <!-- PART 1 -->
+        <h2>Part 1 - 10 questions - Look and read. Choose the correct words and write them on the lines. There is one example.</h2>
+        <div class="word-bank">
+            <b>Words list:</b> an astronaut, a pilot, golf, sugar, basketball, hockey, jam, magazines, baseball, stamps, postcards, a journalist, letters, a photographer[cite: 178].
+        </div>
+        
+        <div class="question-box">
+            <p><b>Example:</b> This person can fly to the moon in a rocket. 👉 <i>an astronaut</i>[cite: 178]</p>
+        </div>
+        <div class="question-box"><p><b>1.</b> This is made from fruit and you can put it on your bread with a knife[cite: 178].</p><input type="text" id="p1_q1" placeholder="Enter answer..." required></div>
+        <div class="question-box"><p><b>2.</b> Players in this game throw, catch and hit the ball on a sports field[cite: 178].</p><input type="text" id="p1_q2" placeholder="Enter answer..." required></div>
+        <div class="question-box"><p><b>3.</b> These have pictures on them and you can write on the back and send them to friends when you're on holiday[cite: 178].</p><input type="text" id="p1_q3" placeholder="Enter answer..." required></div>
+        <div class="question-box"><p><b>4.</b> It is this person's job to write about news in a newspaper[cite: 178].</p><input type="text" id="p1_q4" placeholder="Enter answer..." required></div>
+        <div class="question-box"><p><b>5.</b> You buy these and put them on your envelopes before you post them[cite: 178].</p><input type="text" id="p1_q5" placeholder="Enter answer..." required></div>
+        <div class="question-box"><p><b>6.</b> This person flies a plane and usually wears a uniform[cite: 178].</p><input type="text" id="p1_q6" placeholder="Enter answer..." required></div>
+        <div class="question-box"><p><b>7.</b> People like reading these because they have stories with pictures or photos on their pages[cite: 178].</p><input type="text" id="p1_q7" placeholder="Enter answer..." required></div>
+        <div class="question-box"><p><b>8.</b> You can play this game inside on ice or outside on a field[cite: 178].</p><input type="text" id="p1_q8" placeholder="Enter answer..." required></div>
+        <div class="question-box"><p><b>9.</b> Some people like this in their tea or coffee and they put it in with a spoon[cite: 178].</p><input type="text" id="p1_q9" placeholder="Enter answer..." required></div>
+        <div class="question-box"><p><b>10.</b> People don't usually play this game in teams. They use a small, hard white ball[cite: 178].</p><input type="text" id="p1_q10" placeholder="Enter answer..." required></div>
+
+        <!-- PART 2 -->
+        <h2>Part 2 - 5 questions - Katy is going to go with her Aunt Emma to her office today. Read the conversation and choose the best answer. Write a letter (A-H).</h2>
+        <div class="img-container">
+            <img src="reading_part2.png" alt="Part 2 Illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="display:none;">[Hình ảnh: reading_part2.png]</div>
+        </div>
+        <div class="question-box"><p><b>Example:</b> Katy: Emma, is it time to go to your office? 👉 <b>E. Yes it is. I don't want to be late.</b>[cite: 179, 180]</p></div>
+        <div class="question-box"><p><b>1. Katy:</b> Do you always walk to work?[cite: 179]</p><select id="p2_q1" required><option value="">-- Choose (A-H) --</option><option value="A">A. Sometimes I sit at my desk...</option><option value="C">C. OK, but only when I am in a meeting.</option><option value="G">G. I take the bus if it's raining.</option><option value="H">H. Only a few. It's a small business.</option></select></div>
+        <div class="question-box"><p><b>2. Katy:</b> How many people work there?[cite: 179]</p><select id="p2_q2" required><option value="">-- Choose (A-H) --</option><option value="A">A. Sometimes I sit at my desk...</option><option value="C">C. OK, but only when I am in a meeting.</option><option value="G">G. I take the bus if it's raining.</option><option value="H">H. Only a few. It's a small business.</option></select></div>
+        <div class="question-box"><p><b>3. Katy:</b> Where do you eat your lunch?[cite: 179]</p><select id="p2_q3" required><option value="">-- Choose (A-H) --</option><option value="A">A. Sometimes I sit at my desk and sometimes I go out.</option><option value="D">D. No, there aren't many cafés...</option><option value="F">F. Usually when I've finished...</option></select></div>
+        <div class="question-box"><p><b>4. Katy:</b> Can I play on the computer in your office?[cite: 179]</p><select id="p2_q4" required><option value="">-- Choose (A-H) --</option><option value="B">B. Yes, everyone did this time.</option><option value="C">C. OK, but only when I am in a meeting.</option><option value="F">F. Usually when I've finished...</option></select></div>
+        <div class="question-box"><p><b>5. Katy:</b> What time do you come home?[cite: 179]</p><select id="p2_q5" required><option value="">-- Choose (A-H) --</option><option value="B">B. Yes, everyone did this time.</option><option value="F">F. Usually when I've finished everything that I've got to do.</option><option value="G">G. I take the bus if it's raining.</option></select></div>
+
+        <!-- PART 3 -->
+        <h2>Part 3 - 6 questions - Read the story. Choose a word from the box. Write the correct word next to numbers 1-5.</h2>
+        <div class="img-container">
+            <img src="reading_part3.png" alt="Part 3 Illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="display:none;">[Hình ảnh: reading_part3.png]</div>
+        </div>
+        <div class="word-bank"><b>Words list:</b> island, fridge, pushed, restaurant, missing, ready, pepper, sky, storm, cut[cite: 181, 182]</div>
+        <div class="question-box" style="line-height: 1.8;">
+            Last weekend, Harry and his parents went to a small hotel on an <b>island</b> in a lake. On Saturday afternoon the hotel cook went by boat to the town to see a friend. But then suddenly a <input type="text" id="p3_q1" placeholder="1..." style="width:120px; display:inline-block;" required> came, with rain and strong winds, and he couldn't sail back[cite: 181]. 
+            At six o'clock everyone in the hotel went to the <input type="text" id="p3_q2" placeholder="2..." style="width:120px; display:inline-block;" required> to have dinner, but it was closed[cite: 181]. 'What's the matter?' Harry's mum asked. 'The dinner isn't <input type="text" id="p3_q3" placeholder="3..." style="width:120px; display:inline-block;" required>,' he said[cite: 181]. They went into the kitchen and looked in the <input type="text" id="p3_q4" placeholder="4..." style="width:120px; display:inline-block;" required>[cite: 182]. Dad made pizzas and Mum <input type="text" id="p3_q5" placeholder="5..." style="width:120px; display:inline-block;" required> small pieces for a salad[cite: 182].
+            <p style="margin-top:10px;"><b>6. Now choose the best name for the story:</b> <select id="p3_q6" required><option value="">-- Choose title --</option><option value="wrong">Harry buys pizza</option><option value="wrong">Lunch on a boat</option><option value="correct">The new cooks</option></select>[cite: 182]</p>
+        </div>
+
+        <!-- PART 4 -->
+        <h2>Part 4 - 10 questions - Read the text. Choose the right words and write them on the lines. (The Seasons)</h2>
+        <div class="img-container">
+            <img src="reading_part4.png" alt="Part 4 Illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="display:none;">[Hình ảnh: reading_part4.png]</div>
+        </div>
+        <div class="question-box">
+            <p><b>1.</b> Each season <select id="p4_q1" required><option value="">-- Choose --</option><option value="is">is</option><option value="are">are</option></select> about three months long[cite: 183, 184].</p>
+            <p><b>2.</b> In the north of our planet summer usually <select id="p4_q2" required><option value="">-- Choose --</option><option value="began">began</option><option value="begins">begins</option></select> in June[cite: 183, 184].</p>
+            <p><b>3.</b> ...it sometimes does not get dark <select id="p4_q3" required><option value="">-- Choose --</option><option value="until">until</option><option value="for">for</option></select> 10 o'clock[cite: 183, 184].</p>
+            <p><b>4.</b> ...the trees <select id="p4_q4" required><option value="">-- Choose --</option><option value="lost">lost</option><option value="lose">lose</option></select> their leaves[cite: 183, 184].</p>
+            <p><b>5.</b> Winter comes in December <select id="p4_q5" required><option value="">-- Choose --</option><option value="when">when</option><option value="which">which</option></select> it is usually very cold[cite: 183, 184].</p>
+            <p><b>6.</b> ...short <select id="p4_q6" required><option value="">-- Choose --</option><option value="in">in</option><option value="at">at</option></select> the afternoon[cite: 183, 184].</p>
+            <p><b>7.</b> ...plants and flowers start to <select id="p4_q7" required><option value="">-- Choose --</option><option value="grow">grow</option><option value="grew">grew</option></select>[cite: 183, 184].</p>
+            <p><b>8.</b> ...have the <select id="p4_q8" required><option value="">-- Choose --</option><option value="same">same</option><option value="both">both</option></select> seasons[cite: 183, 184].</p>
+            <p><b>9.</b> ...different times <select id="p4_q9" required><option value="">-- Choose --</option><option value="of">of</option><option value="for">for</option></select> the year[cite: 183, 184].</p>
+            <p><b>10.</b> They have summer <select id="p4_q10" required><option value="">-- Choose --</option><option value="in">in</option><option value="on">on</option></select> December[cite: 183, 184].</p>
+        </div>
+
+        <!-- PART 5 -->
+        <h2>Part 5 - 7 questions - Look at the picture and read the story. Write some words to complete the sentences. (Mr Park's class visit a castle)</h2>
+        <div class="img-container">
+            <img src="reading_part5.png" alt="Part 5 Illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="display:none;">[Hình ảnh: reading_part5.png]</div>
+        </div>
+        <div class="question-box">
+            <p><b>1.</b> Mr Park and the children went in a <input type="text" id="p5_q1" placeholder="answer..." required> to a castle[cite: 185, 187].</p>
+            <p><b>2.</b> The castle that they visited was near <input type="text" id="p5_q2" placeholder="answer..." required> and on a hill[cite: 185, 187].</p>
+            <p><b>3.</b> Mr Park gave everyone <input type="text" id="p5_q3" placeholder="answer..." required> when they arrived at the castle[cite: 185, 187].</p>
+            <p><b>4.</b> The children looked at the <input type="text" id="p5_q4" placeholder="answer..." required> of the castle[cite: 185, 187].</p>
+            <p><b>5.</b> Some of the children had <input type="text" id="p5_q5" placeholder="answer..." required> on the way down the hill[cite: 185, 187].</p>
+            <p><b>6.</b> Paul <input type="text" id="p5_q6" placeholder="answer..." required> because he fell over when he was running[cite: 185, 187].</p>
+            <p><b>7.</b> Paul went back to the bus on a <input type="text" id="p5_q7" placeholder="answer..." required>![cite: 185, 187]</p>
+        </div>
+
+        <!-- PART 6 -->
+        <h2>Part 6 - 5 questions - Read the diary and write the missing words. Write one word on each line. (The Pyramids)</h2>
+        <div class="img-container">
+            <img src="reading_part6.png" alt="Part 6 Illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="display:none;">[Hình ảnh: reading_part6.png]</div>
+        </div>
+        <div class="question-box">
+            <p><b>1.</b> Today we've been <input type="text" id="p6_q1" placeholder="missing word..." required> visit the pyramids[cite: 188].</p>
+            <p><b>2.</b> My teacher told me about them in our Geography <input type="text" id="p6_q2" placeholder="missing word..." required>[cite: 188].</p>
+            <p><b>3.</b> ...in the pictures they looked much smaller <input type="text" id="p6_q3" placeholder="missing word..." required> they are[cite: 188].</p>
+            <p><b>4.</b> We went inside <input type="text" id="p6_q4" placeholder="missing word..." required> one and I took lots of photos[cite: 188].</p>
+            <p><b>5.</b> I am very excited <input type="text" id="p6_q5" placeholder="missing word..." required> I have always wanted to ride one[cite: 188].</p>
+        </div>
+
+        <!-- PART 7 -->
+        <h2>Part 7 - Look at the three pictures. Write about this story. Write 20 or more words.</h2>
+        <div class="img-container">
+            <img src="reading_part7.png" alt="Part 7 Illustration" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="img-placeholder" style="display:none;">[Hình ảnh: reading_part7.png - 3 tranh về phi hành gia và người ngoài hành tinh]</div>
+        </div>
+        <div class="question-box">
+            <p><b>Write your story here (Minimum 20 words):</b></p>
+            <textarea id="p7_story" placeholder="Look at the pictures and write your story..."></textarea>
+            
+            <div class="suggestion-box">
+                💡 <b>Gợi ý từ vựng & cấu trúc cho Part 7 (Học sinh tham khảo):</b><br>
+                • <i>Picture 1:</i> astronaut, moon, alien, meet, shake hands, rocket[cite: 188].<br>
+                • <i>Picture 2:</i> hungry, think about, sandwich, orange juice, smile.<br>
+                • <i>Picture 3:</i> table, eat together, happy, spaceship, friends.<br>
+                • <i>Cấu trúc gợi ý:</i> "An astronaut landed on the moon. He met a green alien and they shaked hands. Then they sat at a table and ate sandwiches together happily."
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Nộp bài & Kiểm tra kết quả</button>
+    </form>
+    <div id="rwFullResult" class="result-box"></div>
+</div>
+
+<script>
+    function checkAllRW(event) {
+        event.preventDefault();
+        
+        let score = 0;
+        let total = 37; // Tổng số câu từ Part 1 đến Part 6 (10 + 5 + 6 + 10 + 7 + 5)
+
+        // Chấm điểm Part 1 (10 câu)
+        const p1_ans = ['jam', 'basketball', 'postcards', 'a journalist', 'stamps', 'a pilot', 'magazines', 'hockey', 'sugar', 'baseball'];
+        for(let i=1; i<=10; i++) {
+            let val = document.getElementById('p1_q'+i).value.trim().toLowerCase();
+            if(val === p1_ans[i-1] || val === p1_ans[i-1].replace('a ', '')) score++;
+        }
+
+        // Chấm điểm Part 2 (5 câu)
+        if(document.getElementById('p2_q1').value === 'G') score++;
+        if(document.getElementById('p2_q2').value === 'H') score++;
+        if(document.getElementById('p2_q3').value === 'A') score++;
+        if(document.getElementById('p2_q4').value === 'C') score++;
+        if(document.getElementById('p2_q5').value === 'F') score++;
+
+        // Chấm điểm Part 3 (6 câu)
+        if(document.getElementById('p3_q1').value.trim().toLowerCase() === 'storm') score++;
+        if(document.getElementById('p3_q2').value.trim().toLowerCase() === 'restaurant') score++;
+        if(document.getElementById('p3_q3').value.trim().toLowerCase() === 'ready') score++;
+        if(document.getElementById('p3_q4').value.trim().toLowerCase() === 'fridge') score++;
+        if(document.getElementById('p3_q5').value.trim().toLowerCase() === 'cut') score++;
+        if(document.getElementById('p3_q6').value === 'correct') score++;
+
+        // Chấm điểm Part 4 (10 câu)
+        if(document.getElementById('p4_q1').value === 'is') score++;
+        if(document.getElementById('p4_q2').value === 'begins') score++;
+        if(document.getElementById('p4_q3').value === 'until') score++;
+        if(document.getElementById('p4_q4').value === 'lose') score++;
+        if(document.getElementById('p4_q5').value === 'when') score++;
+        if(document.getElementById('p4_q6').value === 'in') score++;
+        if(document.getElementById('p4_q7').value === 'grow') score++;
+        if(document.getElementById('p4_q8').value === 'same') score++;
+        if(document.getElementById('p4_q9').value === 'of') score++;
+        if(document.getElementById('p4_q10').value === 'in') score++;
+
+        // Chấm điểm Part 5 (7 câu)
+        const p5_ans = ['bus', 'sea', 'juice', 'history', 'a race', 'couldn\'t walk', 'horse'];
+        for(let i=1; i<=7; i++) {
+            let val = document.getElementById('p5_q'+i).value.trim().toLowerCase();
+            if(val.includes(p5_ans[i-1]) || p5_ans[i-1].includes(val)) score++;
+        }
+
+        // Chấm điểm Part 6 (5 câu)
+        const p6_ans = ['to', 'lesson', 'than', 'inside', 'because'];
+        for(let i=1; i<=5; i++) {
+            let val = document.getElementById('p6_q'+i).value.trim().toLowerCase();
+            if(val === p6_ans[i-1]) score++;
+        }
+
+        // Part 7 (Tự luận viết truyện - Không chấm điểm đúng sai, chỉ đếm số từ)
+        let storyText = document.getElementById('p7_story').value.trim();
+        let wordCount = storyText === "" ? 0 : storyText.split(/\s+/).length;
+
+        const resBox = document.getElementById('rwFullResult');
+        resBox.style.display = 'block';
+        resBox.className = 'result-box ' + (score >= 25 ? 'correct' : 'incorrect');
+        resBox.innerHTML = `📊 Kết quả chấm tự động (Part 1 - Part 6): Đạt <b>${score}</b> / ${total} câu đúng.<br>` +
+                           (wordCount >= 20 ? `✅ Phần viết truyện (Part 7): Đã hoàn thành (${wordCount} từ - Đạt yêu cầu trên 20 từ). Tuyệt vời!` : `⚠️ Phần viết truyện (Part 7): Đã viết ${wordCount} từ (Cần cố gắng viết tối thiểu từ 20 từ trở lên dựa trên các bức tranh và gợi ý nhé!).`);
+    }
+</script>
+
+</body>
+</html>
