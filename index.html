@@ -110,14 +110,14 @@
         .btn-submit:hover { background-color: #059669; }
         .result-box {
             margin-top: 20px;
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
-            font-weight: bold;
-            text-align: center;
+            font-size: 15px;
             display: none;
         }
-        .correct { color: #065f46; background: #d1fae5; }
-        .incorrect { color: #991b1b; background: #fee2e2; }
+        .correct-summary { color: #065f46; background: #d1fae5; border: 1px solid #a7f3d0; }
+        .incorrect-summary { color: #991b1b; background: #fee2e2; border: 1px solid #fecaca; }
+        .feedback-item { margin-bottom: 6px; }
     </style>
 </head>
 <body>
@@ -256,7 +256,6 @@
 </div>
 
 <script>
-    // Xử lý tự động loại trừ đáp án đã chọn ở Part 2
     const allOptionsP2 = [
         {value: "A", text: "A. Sometimes I sit at my desk and sometimes I go out."},
         {value: "B", text: "B. Yes, everyone did this time."},
@@ -277,10 +276,9 @@
 
         selects.forEach(select => {
             let currentValue = select.value;
-            let html = '<option value="">-- Choose (A-H, trừ E) --</option>';
+            let html = '<option value="">-- Choose (A-H, excl. E) --</option>';
             
             allOptionsP2.forEach(opt => {
-                // Chỉ hiển thị nếu chưa bị chọn ở câu khác, hoặc là giá trị đang chọn của chính ô này
                 if (!selectedValues.includes(opt.value) || currentValue === opt.value) {
                     let selectedAttr = (currentValue === opt.value) ? 'selected' : '';
                     html += `<option value="${opt.value}" ${selectedAttr}>${opt.text}</option>`;
@@ -290,7 +288,6 @@
         });
     }
 
-    // Chạy khi tải trang xong
     window.onload = function() {
         initPart2();
     };
@@ -300,66 +297,32 @@
         
         let score = 0;
         let total = 37;
+        let feedbackHTML = "";
 
-        // Chấm điểm Part 1 (10 câu)
-        const p1_ans = ['jam', 'basketball', 'postcards', 'a journalist', 'stamps', 'a pilot', 'magazines', 'hockey', 'sugar', 'baseball'];
+        // Part 1 (10 questions)[cite: 22]
+        const p1_ans = ['jam', 'baseball', 'postcards', 'a journalist', 'stamps', 'a pilot', 'magazines', 'hockey', 'sugar', 'golf'];
+        let p1_score = 0;
         for(let i=1; i<=10; i++) {
             let val = document.getElementById('p1_q'+i).value.trim().toLowerCase();
-            if(val === p1_ans[i-1] || val === p1_ans[i-1].replace('a ', '')) score++;
+            if(val === p1_ans[i-1] || val === p1_ans[i-1].replace('a ', '')) p1_score++;
         }
+        score += p1_score;
+        feedbackHTML += `<div class="feedback-item"><b>Part 1:</b> Score ${p1_score}/10[cite: 22].</div>`;
 
-        // Chấm điểm Part 2 (5 câu)
-        if(document.getElementById('p2_q1').value === 'G') score++;
-        if(document.getElementById('p2_q2').value === 'H') score++;
-        if(document.getElementById('p2_q3').value === 'A') score++;
-        if(document.getElementById('p2_q4').value === 'C') score++;
-        if(document.getElementById('p2_q5').value === 'F') score++;
-
-        // Chấm điểm Part 3 (6 câu)
-        if(document.getElementById('p3_q1').value.trim().toLowerCase() === 'storm') score++;
-        if(document.getElementById('p3_q2').value.trim().toLowerCase() === 'restaurant') score++;
-        if(document.getElementById('p3_q3').value.trim().toLowerCase() === 'ready') score++;
-        if(document.getElementById('p3_q4').value.trim().toLowerCase() === 'fridge') score++;
-        if(document.getElementById('p3_q5').value.trim().toLowerCase() === 'cut') score++;
-        if(document.getElementById('p3_q6').value === 'correct') score++;
-
-        // Chấm điểm Part 4 (10 câu)
-        if(document.getElementById('p4_q1').value === 'Each') score++;
-        if(document.getElementById('p4_q2').value === 'begins') score++;
-        if(document.getElementById('p4_q3').value === 'until') score++;
-        if(document.getElementById('p4_q4').value === 'lose') score++;
-        if(document.getElementById('p4_q5').value === 'when') score++;
-        if(document.getElementById('p4_q6').value === 'in') score++;
-        if(document.getElementById('p4_q7').value === 'short') score++;
-        if(document.getElementById('p4_q8').value === 'again') score++;
-        if(document.getElementById('p4_q9').value === 'same') score++;
-        if(document.getElementById('p4_q10').value === 'of') score++;
-
-        // Chấm điểm Part 5 (7 câu)
-        const p5_ans = ['bus', 'sea', 'juice', 'history', 'a race', 'couldn\'t walk', 'horse'];
-        for(let i=1; i<=7; i++) {
-            let val = document.getElementById('p5_q'+i).value.trim().toLowerCase();
-            if(val.includes(p5_ans[i-1]) || p5_ans[i-1].includes(val)) score++;
-        }
-
-        // Chấm điểm Part 6 (5 câu)
-        const p6_ans = ['to', 'lesson', 'than', 'inside', 'because'];
+        // Part 2 (5 questions)[cite: 22]
+        const p2_ans = ['g', 'h', 'a', 'c', 'f'];
+        let p2_score = 0;
         for(let i=1; i<=5; i++) {
-            let val = document.getElementById('p6_q'+i).value.trim().toLowerCase();
-            if(val === p6_ans[i-1]) score++;
+            if(document.getElementById('p2_q'+i).value.toLowerCase() === p2_ans[i-1]) p2_score++;
         }
+        score += p2_score;
+        feedbackHTML += `<div class="feedback-item"><b>Part 2:</b> Score ${p2_score}/5[cite: 22].</div>`;
 
-        // Part 7 (Tự luận - Không chấm điểm)
-        let storyText = document.getElementById('p7_story').value.trim();
-        let wordCount = storyText === "" ? 0 : storyText.split(/\s+/).length;
-
-        const resBox = document.getElementById('rwFullResult');
-        resBox.style.display = 'block';
-        resBox.className = 'result-box ' + (score >= 25 ? 'correct' : 'incorrect');
-        resBox.innerHTML = `📊 Kết quả chấm tự động (Part 1 - Part 6): Đạt <b>${score}</b> / ${total} câu đúng.<br>` +
-                           (wordCount >= 20 ? `✅ Phần viết truyện (Part 7): Đã hoàn thành (${wordCount} từ - Đạt yêu cầu trên 20 từ). Tuyệt vời!` : `⚠️ Phần viết truyện (Part 7): Đã viết ${wordCount} từ (Cần cố gắng viết tối thiểu từ 20 từ trở lên dựa trên các bức tranh và gợi ý nhé!).`);
-    }
-</script>
-
-</body>
-</html>
+        // Part 3 (6 questions)[cite: 22]
+        const p3_ans = ['storm', 'restaurant', 'ready', 'fridge', 'cut', 'correct'];
+        let p3_score = 0;
+        for(let i=1; i<=5; i++) {
+            let val = document.getElementById('p3_q'+i).value.trim().toLowerCase();
+            if(val === p3_ans[i-1]) p3_score++;
+        }
+        if(document.getElementById('p3_q6').value === 'correct') p3
